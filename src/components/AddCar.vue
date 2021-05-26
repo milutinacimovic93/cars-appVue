@@ -77,6 +77,11 @@
                     <button type="submit" class="btn btn-primary" @click="add">Add</button>
                 </div>
             </div>
+            <div class="form-group row">
+                <div class="col-sm-10">
+                    <button type="submit" class="btn btn-primary" @click="reset">Reset</button>
+                </div>
+            </div>
         </form>
 </template>
 
@@ -102,6 +107,15 @@
                 CarService.add(this.newCar);
                 this.$router.push({name: "Cars"});
             },
+            reset() {
+                this.newCar.brand = '';
+                this.newCar.model = '';
+                this.newCar.year = '';
+                this.newCar.maxSpeed = '';
+                this.newCar.numberOfDoors = '';
+                this.newCar.isAutomatic = '';
+                this.newCar.engine = '';
+            }
         },
     };
 </script>
