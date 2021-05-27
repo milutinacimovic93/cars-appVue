@@ -1,88 +1,102 @@
 <template>
-    <form>
-    <div class="form-group row">
-      <label class="col-4 col-form-label" for="brand">Brand</label> 
-      <div class="col-8">
-        <input id="brand" name="brand" type="text" class="form-control here" required="required" v-model="newCar.brand">
-      </div>
-    </div>
-    <div class="form-group row">
-      <label for="model" class="col-4 col-form-label">Model</label> 
-      <div class="col-8">
-        <input id="model" name="model" type="text" class="form-control here" v-model="newCar.model">
-      </div>
-    </div>
-    <div class="form-group row">
-      <label for="year" class="col-4 col-form-label">Year</label> 
-      <div class="col-8">
-        <select id="year" name="year" class="custom-select" required="required" v-model="newCar.year">
-          <option v-for="year in yearsOfCar" :key="year">{{ year }}</option>
-        </select>
-      </div>
-    </div>
-    <div class="form-group row">
-      <label for="speed" class="col-4 col-form-label">Maximum Speed</label> 
-      <div class="col-8">
-        <input id="speed" name="speed" type="number" class="form-control here" required="required" v-model="newCar.maxSpeed">
-      </div>
-    </div>
-    <div class="form-group row">
-      <label for="doors" class="col-4 col-form-label">Number of Doors</label> 
-      <div class="col-8">
-        <input id="doors" name="doors" type="number" class="form-control here" required="required" v-model="newCar.numberOfDoors">
-      </div>
-    </div>
-    <div class="form-group row">
-      <label class="col-4 col-form-label">Engine</label> 
-      <div class="col-8">
-        <div class="form-check">
-          <label class="form-check-label">
-            <input name="engine" type="radio" required="required" class="form-check-input" value="electric" v-model="newCar.engine">
-            Electric
-          </label>
+    <form @submit.prevent="validateFields" class="jumbotron">
+        <div class="form-group row">
+            <label class="col-4 col-form-label" for="brand">Brand</label>
+            <div class="col-8">
+                <input id="brand" name="brand" type="text" class="form-control here" required minlength="2"
+                    v-model="newCar.brand">
+            </div>
         </div>
-        <div class="form-check">
-          <label class="form-check-label">
-            <input name="engine" type="radio" required="required" class="form-check-input" value="petrol" v-model="newCar.engine">
-            Petrol
-          </label>
+        <div class="form-group row">
+            <label for="model" class="col-4 col-form-label">Model</label>
+            <div class="col-8">
+                <input id="model" name="model" type="text" class="form-control here" required minlength="2"
+                    v-model="newCar.model">
+            </div>
         </div>
-        <div class="form-check">
-          <label class="form-check-label">
-            <input name="engine" type="radio" required="required" class="form-check-input" value="hybrid" v-model="newCar.engine">
-            Hybrid
-          </label>
+        <div class="form-group row">
+            <label for="year" class="col-4 col-form-label">Year</label>
+            <div class="col-8">
+                <select id="year" name="year" class="custom-select" required="required" v-model="newCar.year">
+                    <option v-for="year in yearsOfCar" :key="year">{{ year }}</option>
+                </select>
+            </div>
         </div>
-        <div class="form-check">
-          <label class="form-check-label">
-            <input name="engine" type="radio" required="required" class="form-check-input" value="diesel" v-model="newCar.engine">
-            Diesel
-          </label>
+        <div class="form-group row">
+            <label for="speed" class="col-4 col-form-label">Maximum Speed</label>
+            <div class="col-8">
+                <input id="speed" name="speed" type="number" class="form-control here" minlength="2"
+                    v-model="newCar.maxSpeed">
+            </div>
         </div>
-      </div>
-    </div>
-    <div class="form-group row">
-      <div class="col-4"></div> 
-      <div class="col-8">
-        <div class="form-check form-check-inline">
-          <label class="form-check-label">
-            <input name="automatic" type="checkbox" class="form-check-input" value="true" v-model="newCar.isAutomatic">
-            Automatic
-          </label>
+        <div class="form-group row">
+            <label for="doors" class="col-4 col-form-label">Number of Doors</label>
+            <div class="col-8">
+                <input id="doors" name="doors" type="number" class="form-control here" required min="2"
+                    v-model="newCar.numberOfDoors">
+            </div>
         </div>
-      </div>
-    </div> 
-            <div class="form-group row">
-                <div class="col-sm-10">
-                    <button type="submit" class="btn btn-primary" @click="add">Add</button>
+        <div class="form-group row">
+            <label class="col-4 col-form-label">Engine</label>
+            <div class="col-8">
+                <div class="form-check">
+                    <label class="form-check-label">
+                        <input name="engine" type="radio" required="required" class="form-check-input" value="electric"
+                            v-model="newCar.engine">
+                        Electric
+                    </label>
+                </div>
+                <div class="form-check">
+                    <label class="form-check-label">
+                        <input name="engine" type="radio" required="required" class="form-check-input" value="petrol"
+                            v-model="newCar.engine">
+                        Petrol
+                    </label>
+                </div>
+                <div class="form-check">
+                    <label class="form-check-label">
+                        <input name="engine" type="radio" required="required" class="form-check-input" value="hybrid"
+                            v-model="newCar.engine">
+                        Hybrid
+                    </label>
+                </div>
+                <div class="form-check">
+                    <label class="form-check-label">
+                        <input name="engine" type="radio" required="required" class="form-check-input" value="diesel"
+                            v-model="newCar.engine">
+                        Diesel
+                    </label>
                 </div>
             </div>
-            <div class="form-group row">
-                <div class="col-sm-10">
-                    <button type="submit" class="btn btn-primary" @click="reset">Reset</button>
+        </div>
+        <div class="form-group row">
+            <div class="col-4"></div>
+            <div class="col-8">
+                <div class="form-check form-check-inline">
+                    <label class="form-check-label">
+                        <input name="automatic" type="checkbox" class="form-check-input" value="true"
+                            v-model="newCar.isAutomatic">
+                        Automatic
+                    </label>
                 </div>
             </div>
-        </form>
+        </div>
+        <div class="form-group row">
+            <div class="col-sm-10">
+                <button type="submit" class="btn btn-primary" @click="add">Add</button>
+            </div>
+        </div>
+        <div class="form-group row">
+            <div class="col-sm-10">
+                <button type="submit" class="btn btn-primary" @click="reset">Reset</button>
+            </div>
+        </div>
+        <div class="form-group row">
+            <div class="col-sm-10">
+                <button name="preview" type="submit" @click="preview" class="btn btn-primary">Preview</button>
+            </div>
+        </div>
+    </form>
 </template>
 
 <script>
@@ -98,14 +112,16 @@
                     maxSpeed: null,
                     numberOfDoors: null,
                     isAutomatic: false,
-                    engine: "",
+                    engine: '',
                 },
             };
         },
         methods: {
             add() {
                 CarService.add(this.newCar);
-                this.$router.push({name: "Cars"});
+                this.$router.push({
+                    name: "Cars"
+                });
             },
             reset() {
                 this.newCar.brand = '';
@@ -115,8 +131,20 @@
                 this.newCar.numberOfDoors = '';
                 this.newCar.isAutomatic = '';
                 this.newCar.engine = '';
-            }
-        },
+            },
+            preview() {
+                alert(`
+                    Brand: ${this.newCar.brand}
+                    Model: ${this.newCar.model}
+                    Manufactory year: ${this.newCar.year}
+                    Maximum Speed: ${this.newCar.maxSpeed}
+                    Number of Doors: ${this.newCar.numberOfDoors}
+                    Engine: ${this.newCar.model}
+                    Is Automatic: ${this.newCar.isAutomatic}
+                    `)
+            },
+
+        }
     };
 </script>
 
